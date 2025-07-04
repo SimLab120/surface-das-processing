@@ -25,9 +25,6 @@ from raylee_processing.forward.raylee_lysmer import raylee_lysmer
 Nn = 240                          # Number of solid elements
 h = 250 * np.ones(Nn)            # Grid spacing in solid (meters)
 
-Nnf = 0                           # Number of fluid elements
-hfv = 100 * np.ones(Nnf)         # Grid spacing in fluid (meters)
-
 # ----------------------------------
 # 2. Frequency and mode definition
 # ----------------------------------
@@ -48,6 +45,12 @@ vtypv = np.zeros(Nf)             # 0: phase velocity, 1: group velocity
 vpvsr = 1.7321                  # Vp/Vs ratio
 gardc = 309.6                   # Gardner's constant
 powr = 0.25                     # Gardner's exponent
+
+# No water layer, so no fluid parameters needed
+Nnf = 0
+vpfv = 1
+rhofv = 1
+hfv = 1
 
 # Define 4-layer velocity and density model
 layrth1 = 5
@@ -79,22 +82,17 @@ rhov = np.concatenate([
 ])
 
 # ---------------------------
-# 4. Define fluid properties
-# ---------------------------
-vpfv = 1500 * np.ones(Nnf)
-rhofv = 1000 * np.ones(Nnf)
-
-# ---------------------------
-# 5. Forward modeling loop
+# 4. Forward modeling loop
 # ---------------------------
 vout = np.zeros(Nf)
 for i, f in enumerate(fks):
     modn = int(modnv[i])
-    kk, vpk, vgk, ev = raylee_lysmer(Nn, vsv, vpv, rhov, f, h, modn, Nnf, vpfv, rhofv, hfv)
+    # Set all fluid-related arguments to None or zero as they are unused
+    kk, vpk, vgk, ev = raylee_lysmer(Nn, vsv, vpv, rhov, f, h, modn, Nnf, )
     vout[i] = vpk if vtypv[i] == 0 else vgk
 
 # --------------------------------------
-# 6. Optionally add 2.5% Gaussian noise
+# 5. Optionally add 2.5% Gaussian noise
 # --------------------------------------
 add_noise = False                           # <-- Set to True if you want to add noise
 
@@ -103,7 +101,7 @@ if add_noise:
     vout *= (1 + 0.025 * np.random.randn(Nf))
 
 # ---------------------------------------------
-# 7. Filter out NaNs and clean up the vectors
+# 6. Filter out NaNs and clean up the vectors
 # ---------------------------------------------
 valid = ~np.isnan(vout)
 vout = vout[valid]
@@ -113,7 +111,7 @@ vtypv = vtypv[valid]
 Nf = len(vout)
 
 # -------------------
-# 8. Save output data
+# 7. Save output data
 # -------------------
 np.savetxt('velocity_values.txt', vout, fmt='%.5f')
 np.savetxt('velocity_values_errs.txt', vout * 0.025, fmt='%.5f')
@@ -124,7 +122,7 @@ np.savetxt('vtype_values.txt', vtypv, fmt='%.5f')
 print("Synthetic Lysmer data generation complete. Output written to text files.")
 
 # =============================================================================
-# 9. Also compute using DISBA for comparison
+# 8. Also compute using DISBA for comparison
 # =============================================================================
 from disba import PhaseDispersion
 
@@ -164,4 +162,3 @@ np.savetxt("disba_mode_values.txt", disba_modes, fmt="%.5f")
 np.savetxt("disba_vtype_values.txt", disba_vtypes, fmt="%.5f")
 
 print("DISBA results saved as text files.")
-
