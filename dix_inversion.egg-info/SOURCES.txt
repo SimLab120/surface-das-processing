@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+setup.py
+dix_inversion/__init__.py
+dix_inversion/dix_inverse.py
+dix_inversion/linvers.py
+dix_inversion/numerical_tests.py
+dix_inversion/raylee_lysmer.py
+dix_inversion/raylee_sensitivity.py
+dix_inversion/stoneley_velocity.py
+dix_inversion/utils.py
+dix_inversion.egg-info/PKG-INFO
+dix_inversion.egg-info/SOURCES.txt
+dix_inversion.egg-info/dependency_links.txt
+dix_inversion.egg-info/requires.txt
+dix_inversion.egg-info/top_level.txt

@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: dix_inversion
+Version: 0.1
+Summary: Rayleigh wave inversion using Dix method
+Author: Prahlada Mittal
+Requires-Dist: numpy
+Requires-Dist: scipy
+Requires-Dist: matplotlib
+Dynamic: author
+Dynamic: requires-dist
+Dynamic: summary

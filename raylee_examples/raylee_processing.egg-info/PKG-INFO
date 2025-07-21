@@ -1,7 +1,0 @@
-Metadata-Version: 2.4
-Name: raylee-processing
-Version: 0.1
-Summary: Rayleigh wave processing tools
-Author: PVM
-License: IITB
-Requires-Python: >=3.8
