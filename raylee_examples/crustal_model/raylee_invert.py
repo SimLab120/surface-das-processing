@@ -425,7 +425,7 @@ print(f"Chi-squared per frequency (iteration {nupdat + 1}): {chisqurd[nupdat + 1
 print(f"Max abs(dvs): {np.max(np.abs(dvs)):.6f}")
 
 # ---------------------- Posterior Covariance and Resolution Matrices ----------------------
-depth_limit = 150  # cutoff depth in meters
+depth_limit = 1000  # cutoff depth in meters
 
 G = snsmf_vstotr.T    # Sensitivity matrix: shape [Nf, Nn]
 Cd = dcm              # Data covariance: shape [Nf, Nf]
@@ -474,10 +474,10 @@ plt.gca().tick_params(labelsize=12)
 plt.show()
 
 # Plot settings
-depth_limit = 150  # meters
+depth_limit = 1000  # meters
 depth_idx = hss <= depth_limit
 
-# 1. Shear Velocity Model Plot (cut at 150 m)
+# 1. Shear Velocity Model Plot (cut at 1000 m)
 plt.figure()
 plt.plot(vsv_guess[depth_idx], hss[depth_idx], 'r--o', linewidth=2, label='Initial Model')
 plt.plot(vsv_update[nupdat, depth_idx], hss[depth_idx], 'k-o', linewidth=2, label='Final Inverted Model')
@@ -485,7 +485,7 @@ plt.gca().invert_yaxis()
 plt.xlabel('Vs (m/s)')
 plt.ylabel('Depth (m)')
 plt.legend()
-plt.title('Shear Wave Velocity Model (Top 150 m)')
+plt.title('Shear Wave Velocity Model (Top 1000 m)')
 plt.grid(True)
 plt.tight_layout()
 plt.show()
@@ -498,12 +498,12 @@ plt.gca().invert_yaxis()
 plt.xlabel('Vs (m/s)')
 plt.ylabel('Depth (m)')
 plt.legend()
-plt.title('Shear Wave Velocity with Posterior Uncertainty (Top 150 m)')
+plt.title('Shear Wave Velocity with Posterior Uncertainty (Top 1000 m)')
 plt.grid(True)
 plt.tight_layout()
 plt.show()
 
-# 3. Sensitivity Kernel Plot (Top 150 m)
+# 3. Sensitivity Kernel Plot (Top 1000 m)
 depth_interp = np.arange(0, np.sum(h)+min(h), min(h))
 depth_interp = depth_interp[depth_interp <= depth_limit]
 snsmf_vstoti = np.zeros((len(depth_interp), snsmf_vstot.shape[1]))
@@ -517,7 +517,7 @@ plt.imshow(snsmf_vstoti / min(h), aspect='auto', extent=[fks[0], fks[-1], depth_
 plt.colorbar()
 plt.xlabel('Frequency (Hz)')
 plt.ylabel('Depth (m)')
-plt.title('Vs Sensitivity Kernel (Top 150 m)')
+plt.title('Vs Sensitivity Kernel (Top 1000 m)')
 plt.tight_layout()
 plt.show()
 
@@ -536,7 +536,7 @@ plt.gca().invert_yaxis()
 plt.xlabel('Relative Std Dev (σ / Vs)')
 plt.ylabel('Depth (m)')
 plt.legend()
-plt.title('Relative Model Uncertainty (Top 150 m)')
+plt.title('Relative Model Uncertainty (Top 1000 m)')
 plt.grid(True)
 plt.tight_layout()
 plt.show()
