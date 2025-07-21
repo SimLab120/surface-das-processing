@@ -52,7 +52,7 @@ To access all required functions for Rayleigh wave inversion in your scripts, si
 ```
 import dix_inversion as dix
 
-sensitivity = dix.sensitivity(vp, vs, .....)
+sensitivity = dix.raylee_sensitivity(vp, vs, .....)
 ```
 This will give you direct access to core functionalities including:
 
