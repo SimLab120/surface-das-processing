@@ -10,8 +10,6 @@ We generate and visualize synthetic Rayleigh-wave dispersion data using the fini
 
 ## 📦 Installation
 
-## ⚙️ Environment Setup
-
 We strongly recommend using a Python virtual environment:
 
 ```bash
