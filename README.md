@@ -56,6 +56,7 @@ sensitivity = dix.raylee_sensitivity(vp, vs, .....)
 ```
 This will give you direct access to core functionalities including:
 
+```
 raylee_sensitivity — Forward modeling using Lysmer’s method
 
 linvers — Damped least squares inversion solver
@@ -67,6 +68,7 @@ compute_xia_interpolation — Interpolation of shear velocity for Dix-based inve
 stoneley_velocity — Optional Stoneley mode calculation
 
 check_nans, update_covariances, compute_misfit — Utility tools for robust inversion
+```
 
 
 
