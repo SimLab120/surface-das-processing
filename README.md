@@ -133,7 +133,7 @@ python make_initial_model_ex1.py
 **Run the inversion:**
 
 ```bash
-python taylee_invert.py
+python raylee_invert.py
 ```
 
 ---
